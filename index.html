@@ -79,8 +79,26 @@
 			'share_url': location.origin + '/share',
 			'desc': 'desc',
 			'image_url': 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d7.png',
-			'source_name': 'source_name',
 			'success': function() { alert('success'); }
+		});
+	});
+	
+	function onActionClick() {
+		NativeApi.invoke('showActionSheet', {
+			'itemList': ['修改昵称', '修改个性签名'],
+			'cancelText': '取消',
+			'success': function(res) {
+				alert(JSON.stringify(res));
+			}
+		});
+	}
+
+	addButton('setShareInfo', function() {
+		NativeApi.invoke('setActionButton', {
+			'title': '编辑',
+			'iconID': 1,
+			'success': function() { alert('success'); },
+			'trigger': onActionClick
 		});
 	});
 

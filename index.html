@@ -92,7 +92,7 @@
 		} else if (config_status == 2) {
 			console.log("test case 调用config成功再调getCity");
 		}
-		invoke("getCity", {
+		api("getCity", {
 			permission: function (code) {
 				alert("permission - " + code);
 				if (config_status == 0 && code == 10) {

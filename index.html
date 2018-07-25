@@ -51,7 +51,7 @@
 		api("config", {
 			appid: "101490553",
 			permission: function (code) {
-				conosle.log("test pass");
+				console.log("test pass");
 				config_status = 1;
 				alert("permission - " + code);
 			},
@@ -77,7 +77,7 @@
 				alert("permission - " + code);
 			},
 			success: function (res) {
-				conosle.log("test pass");
+				console.log("test pass");
 				config_status = 2;
 				alert("success - " + JSON.stringify(res));
 			}

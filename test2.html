@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>Open Api Test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="format-detection" content="telephone=no">
+        <style type="text/css">
+        *{margin: 0;padding: 0}
+        .container{
+        	margin: 200px 20px 20px 20px
+        }
+        .api{
+        	display: block;
+        	height: 30px;
+        	width: 100%;
+        	text-align: center;
+        	background-color: #fefefe;
+        	margin-bottom: 10px;
+        }
+        </style>
+    </head>
+    <body>
+		<div id="container" class="container">
+    </body>
+<script src="./Native.debug.js"></script>
+<script src="./Native.js"></script>
+<script type="text/javascript">
+;(function () {
+	var container = document.getElementById('container');
+	var api = NativeApi.invoke;
+
+	function addButton(cmdName, func) {
+
+	    var btn = document.createElement('button');
+	    btn.setAttribute('class', 'api');
+	    btn.innerHTML = cmdName;
+	    btn.onclick = function(){
+	        try{
+	            func();
+	        }catch(e){
+	            throw e;
+	        }
+	    };
+	    container.appendChild(btn);
+	}
+
+	var config_status = 0;
+
+	addButton("错误的appid", function() {
+		console.log("test case 错误的appid + 错误的url");
+		api("config", {
+			appid: "101490553",
+			permission: function (code) {
+				conosle.log("test pass");
+				config_status = 1;
+				alert("permission - " + code);
+			},
+			success: function (res) {
+				console.log("test fail");
+				config_status = 2;
+				alert("success - " + JSON.stringify(res));
+			}
+		});
+	});
+
+	addButton('正确的appid', function() {
+		console.log("test case 正确的appid + 错误的url");
+		api("config", {
+			appid: "101490554",
+			permission: function (code) {
+				console.log("test pass");
+				config_status = 1;
+				alert("permission - " + code);
+			},
+			success: function (res) {
+				conosle.log("test fail");
+				config_status = 2;
+				alert("success - " + JSON.stringify(res));
+			}
+		});
+	});
+
+})();
+</script>
+</html>

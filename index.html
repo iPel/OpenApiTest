@@ -131,6 +131,17 @@
 		document.body.appendChild(iframe);
 		iframe.src = "jsbridge://ui/showTips?p=%7B%22text%22%3A%22hahahaha%22%2C%22iconMode%22%3A2%7D#0";
 	});
+
+	addButton('login', function() {
+		api("login", {
+			success: function (res) {
+				alert("success - " + JSON.stringify(res));
+			},
+			failure: function (code, msg) {
+				alert("fail code" + code + " - " + msg);
+			}
+		});
+	});
 	
 	// addButton('setShareInfo', function() {
 	// 	api('setShareInfo', {

@@ -110,7 +110,7 @@
 
 	addButton('setOnShareHandler', function() {
 		NativeApi.invoke("setOnShareHandler", {
-			success: function (data) {
+			trigger: function (data) {
 				alert("type: " + data.type);
 			}
 		});

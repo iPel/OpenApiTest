@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <title>NativeApi Unit Test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="format-detection" content="telephone=no">
+        <style type="text/css">
+        *{margin: 0;padding: 0}
+        .container{
+        	margin: 200px 20px 20px 20px
+        }
+        .api{
+        	display: block;
+        	height: 30px;
+        	width: 100%;
+        	text-align: center;
+        	background-color: #fefefe;
+        	margin-bottom: 10px;
+        }
+        .title{
+        	height: 30px;
+        	width: 100%;
+        	text-align: center;
+        	margin: 20px 0;
+        	border-bottom: #ddd 1px solid;
+        }
+        </style>
+    </head>
+    <body>
+		<div id="container" class="container">
+    </body>
+<script src="./Native.debug.js"></script>
+<script src="./Native.js"></script>
+<script type="text/javascript">
+;(function () {
+	var container = document.getElementById('container');
+
+	function addButton(cmdName, func) {
+
+	    var btn = document.createElement('button');
+	    btn.setAttribute('class', 'api');
+	    btn.innerHTML = cmdName;
+	    btn.onclick = function(){
+	        try{
+	            func();
+	        }catch(e){
+	            throw e;
+	        }
+	    };
+	    container.appendChild(btn);
+	}
+
+	function addTitle(title) {
+
+	    var div = document.createElement('div');
+	    div.setAttribute('class', 'title');
+	    div.innerText = title;
+	    container.appendChild(div);
+	}
+
+	addTitle('鉴权接口');
+
+	addButton('config', function() {
+		NativeApi.invoke("config", {
+			appid: "101490554",
+			permission: function () {
+				alert("permission - "+JSON.stringify(arguments));
+			},
+			success: function () {
+				alert("success - "+JSON.stringify(arguments));
+			},
+			failure: function () {
+				alert("failure - "+JSON.stringify(arguments));
+			},
+			complete: function () {
+				alert("complete - "+JSON.stringify(arguments));
+			},
+			trigger: function () {
+				alert("trigger - "+JSON.stringify(arguments));
+			}
+		});
+	});
+
+	addTitle('界面相关接口');
+
+	addButton('pageVisibility', function() {
+		NativeApi.invoke("pageVisibility", {
+			success: function (data) {
+				alert(data.result);
+			}
+		});
+	});
+
+	addButton('popBack', function() {
+		NativeApi.invoke("popBack");
+	});
+
+	addButton('refreshTitle', function() {
+		NativeApi.invoke("refreshTitle");
+	});
+
+	addButton('scanQRcode', function() {
+		NativeApi.invoke("scanQRcode", {
+			name: "ret",
+			success: function (data) {
+				alert(data.result);
+			}
+		});
+	});
+
+	addButton('setOnShareHandler', function() {
+		NativeApi.invoke("setOnShareHandler", {
+			success: function (data) {
+				alert("type: " + data.type);
+			}
+		});
+	});
+
+	addButton('showActionSheet', function() {
+ 		NativeApi.invoke('showActionSheet', {
+ 		    "itemList" : ["item1", "item2"],
+ 		    "cancelText" : "cancel",
+ 		    "success" : function(data){
+ 		        alert("index: " + data.tapIndex + ", cancel: " + data.cancel);
+ 		    }
+ 		});
+	});
+
+	addButton('setTransparentTitleBar', function() {
+		NativeApi.invoke("setTransparentTitleBar", {
+			bgclr:'#000000',
+			titleclr:'#FF0000'
+		});
+	});
+
+})();
+</script>
+</html>

@@ -71,12 +71,26 @@
 			},
 			failure: function () {
 				alert("failure - "+JSON.stringify(arguments));
-			},
+			}/*,
 			complete: function () {
 				alert("complete - "+JSON.stringify(arguments));
 			},
 			trigger: function () {
 				alert("trigger - "+JSON.stringify(arguments));
+			}*/
+		});
+	});
+
+	addButton('login', function() {
+		NativeApi.invoke("login", {
+			permission: function () {
+				alert("permission - "+JSON.stringify(arguments));
+			},
+			success: function () {
+				alert("success - "+JSON.stringify(arguments));
+			},
+			failure: function () {
+				alert("failure - "+JSON.stringify(arguments));
 			}
 		});
 	});

@@ -97,14 +97,6 @@
 
 	addTitle('界面相关接口');
 
-	addButton('pageVisibility', function() {
-		NativeApi.invoke("pageVisibility", {
-			success: function (data) {
-				alert(data.result);
-			}
-		});
-	});
-
 	addButton('popBack', function() {
 		NativeApi.invoke("popBack");
 	});
@@ -113,37 +105,20 @@
 		NativeApi.invoke("refreshTitle");
 	});
 
-	addButton('scanQRcode', function() {
-		NativeApi.invoke("scanQRcode", {
-			name: "ret",
-			success: function (data) {
-				alert(data.result);
-			}
-		});
-	});
-
-	addButton('setOnShareHandler', function() {
-		NativeApi.invoke("setOnShareHandler", {
+	addButton('setShareListener', function() {
+		NativeApi.invoke("setShareListener", {
 			trigger: function (data) {
 				alert("type: " + data.type);
 			}
 		});
 	});
 
-	addButton('showActionSheet', function() {
- 		NativeApi.invoke('showActionSheet', {
- 		    "itemList" : ["item1", "item2"],
- 		    "cancelText" : "cancel",
- 		    "success" : function(data){
- 		        alert("index: " + data.tapIndex + ", cancel: " + data.cancel);
- 		    }
- 		});
-	});
-
-	addButton('setTransparentTitleBar', function() {
-		NativeApi.invoke("setTransparentTitleBar", {
-			bgclr:'#000000',
-			titleclr:'#FF0000'
+	addButton('setShareInfo', function() {
+		NativeApi.invoke("setShareInfo", {
+			shareUrl:"https://ipel.github.io/", 
+			title:"just a unit test", 
+			desc:"gogogo", 
+			imageUrl: "http://mat1.gtimg.com/www/qq2018/imgs/qq_logo_2018x2.png"
 		});
 	});
 
